@@ -5,61 +5,68 @@ import java.io.File;
 import junit.framework.TestCase; 
 
 public class TestAlmacen extends TestCase {
-
-	private Almacen almacen;	
+	
+	private Almacen almacen;
+	private File archivo = new File( "./data/datos.txt" );
 	
 	public void escenario() throws AlmacenException {
-		almacen = new Almacen(new File( "./data/datos.txt" ));
+		almacen = new Almacen(archivo);
 	}
 	
-	public void testDarCategoriaRaiz()
+	public void testCargar() throws AlmacenException
 	{
 		
 	}
 	
-	public void testCargar()
+	
+	public void testDarCategoriaRaiz() throws AlmacenException
+	{
+		Categoria testCategoriaRaiz = almacen.darCategoriaRaiz(); 
+	}
+	
+	public void testAgregarNodo() throws AlmacenException
 	{
 		
 	}
 	
-	public void testAgregarNodo()
+	public void testEliminarNodo() throws AlmacenException
 	{
 		
 	}
 	
-	public void testEliminarNodo()
+	public void testVenderProducto() throws AlmacenException
 	{
 		
 	}
 	
-	public void testVenderProducto()
+	public void testBuscarNodo() throws AlmacenException
 	{
 		
 	}
 	
-	public void testBuscarNodo()
+	public void testAgregarProducto() throws AlmacenException
 	{
 		
 	}
 	
-	public void testAgregarProducto()
+	public void testEliminarProducto() throws AlmacenException
 	{
 		
 	}
 	
-	public void testEliminarProducto()
+	public void testMetodo1() throws AlmacenException
 	{
-		
+		escenario();
+		String tempStr = "Respuesta 1";
+		String resultado = almacen.metodo1();
+		assertEquals(tempStr, resultado);
 	}
 	
-	public void testMetodo1()
+	public void testMetodo2() throws AlmacenException
 	{
-		assertEquals("Respuesta 1", almacen.metodo1());
-	}
-	
-	public void testMetodo2()
-	{
-		assertEquals("Respuesta 2", almacen.metodo2());
+		escenario();
+		String tempStr = "Respuesta 2";
+		assertEquals(tempStr, almacen.metodo2());
 	}
 	
 }
