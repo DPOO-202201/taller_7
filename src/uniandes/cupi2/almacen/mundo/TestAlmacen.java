@@ -1,5 +1,7 @@
 package uniandes.cupi2.almacen.mundo;
 
+import static org.junit.Assert.assertNotEquals;
+
 import java.io.File;
 import java.util.List;
 
@@ -8,7 +10,7 @@ import junit.framework.TestCase;
 public class TestAlmacen extends TestCase {
 	
 	private Almacen almacen;
-	private File archivo = new File( "./data/datos.txt" );
+	private File archivo = new File( "./data/dataPruebas.txt" );
 	
 	public void escenario() throws AlmacenException {
 		almacen = new Almacen(archivo);
@@ -38,26 +40,9 @@ public class TestAlmacen extends TestCase {
 	public void testAgregarNodo() throws AlmacenException
 	{
 		escenario();
-		Boolean resultadoPrueba;
-		
-		String tempIdPadre = "11";
-		String tempTipo = "Categoria";
-		String tempIdentificador = "113";
-		String tempNombre = "Consolas";
-		almacen.agregarNodo(tempIdPadre, tempTipo, tempIdentificador,  tempNombre);
-		NodoAlmacen tempNodo = almacen.buscarNodo("Consolas");
-		
-		resultadoPrueba = false;
-		
-		if (tempNombre.equals(tempNodo.darNombre())) {
-			if (tempTipo.equals(tempNodo.darTipo())) {
-				if (tempIdentificador.equals(tempNodo.darIdentificador())) {
-						resultadoPrueba = true;
-				}
-			}
-		}
-		
-		assertTrue(resultadoPrueba);
+		almacen.agregarNodo("112", "Marca", "1124", "TOSHIBA");
+		NodoAlmacen tempNodo = almacen.buscarNodo("TOSHIBA");
+		assertNotNull(tempNodo);
 	}
 	
 	public void testEliminarNodo() throws AlmacenException
@@ -87,26 +72,20 @@ public class TestAlmacen extends TestCase {
 	public void testAgregarProducto() throws AlmacenException
 	{
 		escenario();
-		almacen.agregarProducto("ASUS", "12345678", "PC", "QWERTYUIOP", 1000000);
+		almacen.agregarProducto("ASUS", "12345678", "PCGamer", "Swoosh", 10);
 		almacen.venderProducto("12345678", 1);
-		NodoAlmacen tempNodo = almacen.buscarNodo("1121");
-		assertEquals(tempNodo.darValorVentas(),1);
+		NodoAlmacen tempNodo = almacen.buscarNodo(getName());
+		assertEquals(tempNodo.darValorVentas(),10);
 	}
 	
 	public void testEliminarProducto() throws AlmacenException
 	{
 		escenario();
-		boolean resultado = true;
 		almacen.eliminarProducto("34089951");
-		NodoAlmacen tempNodo = almacen.buscarNodo("112");
+		NodoAlmacen tempNodo = almacen.buscarNodo("1123");
 		List<Producto> tempProductos = tempNodo.darProductos();
-		try {
-			tempProductos.get(2);
-		}
-		catch (IndexOutOfBoundsException e) {
-			resultado = false;
-		}
-		assertTrue(resultado);
+		int tempSize = tempProductos.size();
+		assertEquals(2,tempSize);
 	}
 	
 	public void testMetodo1() throws AlmacenException
