@@ -1,105 +1,126 @@
 package uniandes.cupi2.almacen.mundo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import junit.framework.TestCase;
 
 public class TestCategoria extends TestCase
 	{
 		
-		private Categoria categoria = new Categoria("88", "Calzado");;
+		private Categoria categoria;
+		
+		public void crearEscenario() throws AlmacenException
+			{
+			
+				categoria = new Categoria("88", "Calzado");
+				categoria.agregarNodo("88", "Calzado", "89", "Nike");
+				categoria.agregarNodo("89", "Calzado", "90", "Air Max");
+			
+			}
+		
+	    public void testAgregarNodo() throws AlmacenException
+		    {
+	
+		    	crearEscenario();
+	    		assertEquals("Nike", categoria.darNodos().get(0).darNombre());
+	    	
+		    }
 	
 
-	    public void darNodos()
+	    public void testDarNodos() throws AlmacenException
 		    {
 	    	
-	    		//
+	    		
+	    		crearEscenario();
+	    		assertEquals(1, categoria.darNodos().size());
 		       
 		    }
 
 
-	    public void tieneHijo()
+	    public void testTieneHijo() throws AlmacenException
 		    {
 	    	
-	    		//
+    			crearEscenario();
+    			assertEquals(true, categoria.tieneHijo("89"));
 	
 		    }
 
 
-	    public void buscarPadre()
+	    public void testBuscarPadre() throws AlmacenException
 		    {
 	    	
-	    		//
+    			crearEscenario();
+    			assertEquals(categoria, categoria.buscarPadre("89"));
 	
 		    }
 
-	    public void buscarNodo()
+	    public void testBuscarNodo() throws AlmacenException
 		    {
 	    	
-	    		//
+	    		crearEscenario();
+	    		assertEquals(categoria.darNodos().get(0), categoria.buscarNodo("89"));
 	
 		    }
 
-	    public void agregarNodo()
+	    public void testEliminarNodo() throws AlmacenException
 		    {
 	
-	    		//
-	    	
-		    }
-
-	    public void eliminarNodo()
-		    {
-	
-	    		//
+    			crearEscenario();
+    			categoria.eliminarNodo("89");
+    			assertEquals(0, categoria.darNodos().size());
 	    	
 		    }
 
 
-	    public void buscarProducto()
+	    public void testBuscarProducto() throws AlmacenException
 		    {
 	
-	    		//
+    			crearEscenario();
+    			assertEquals(null, categoria.buscarProducto("13"));
 	    	
 		    }
 
 
-	    public void darProductos()
+	    public void testDarProductos() throws AlmacenException
 		    {
 		    	
-		    	//
+    			crearEscenario();
+    			assertEquals(0, categoria.darProductos().size());
 	
 		    }
 
 
-	    public void darMarcas( )
+	    public void testDarMarcas( ) throws AlmacenException
 		    {
 		    	
-		    	//
+    			crearEscenario();
+    			assertEquals(1, categoria.darMarcas().size());
 	
 		    }
 
 
-	    public void darPreorden()
+	    public void testDarPreorden() throws AlmacenException
 		    {
 	
-		    	//
+    			crearEscenario();
+    			assertEquals("Calzado", categoria.darPreorden().get(0).darNombre());
 		    	
 		    }
 
 
-	    public void darPosorden()
+	    public void testDarPosorden() throws AlmacenException
 		    {
 		    	
-		    	//
-	
+    			crearEscenario();
+    			assertEquals("Nike", categoria.darPosorden().get(0).darNombre());
 		    }
 
 
-	    public void darValorVentas()
+	    public void testDarValorVentas() throws AlmacenException
 		    {
 	
-		    	//
+    			crearEscenario();
+    			assertEquals(0.0, categoria.darValorVentas());
 		    	
 		    }
 

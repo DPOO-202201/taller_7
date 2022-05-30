@@ -103,7 +103,7 @@ public class Categoria extends NodoAlmacen
      * @param pIdNodo Identificador del nodo. pIdNodo != null && pIdNodo != "".
      * @return True si esta categor�a tiene un hijo con el identificador dado, False en caso contrario.
      */
-    private boolean tieneHijo( String pIdNodo )
+    public boolean tieneHijo( String pIdNodo )
     {
         boolean respuesta = false;
         for( int i = 0; i < nodosHijos.size( ) && !respuesta; i++ )
@@ -357,15 +357,6 @@ public class Categoria extends NodoAlmacen
         return valorVentas;
     }
 
-    public static void main( String[] args ) throws AlmacenException
-    {
-
-    	Categoria categoria = new Categoria("88", "Calzado");
-    	categoria.agregarNodo("88", "Calzado", "89", "Calzado Nike");
-    	System.out.println(categoria.darNodos().get(0).darIdentificador());
-    	
-    	
-    }
 
 
 }
